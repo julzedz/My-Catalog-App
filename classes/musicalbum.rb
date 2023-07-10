@@ -1,15 +1,14 @@
 require_relative 'item'
 
-class Book < Item
-  attr_accessor :publisher, :cover_state, :id
+class Musicalbum < Item
+  attr_accessor :on_spotify
 
   def initialize(options)
     super(options[:genre], options[:author], options[:label], options[:publish_date], archived: options[:archived])
-    @publisher = options[:publisher]
-    @cover_state = options[:cover_state]
+    @on_spotify = options[:on_spotify] || false
   end
 
   def can_be_archived?
-    super || @cover_state.downcase == 'bad'
+    super && on_spotify
   end
 end
